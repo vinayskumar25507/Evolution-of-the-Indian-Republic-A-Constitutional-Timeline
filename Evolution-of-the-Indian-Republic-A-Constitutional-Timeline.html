@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Constitution Timeline</title>
+<style>
+    /* --- Base Styles for Web --- */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f4f7f6 0%, #e0eafc 100%);
+        margin: 0;
+        padding: 40px 20px;
+        color: #333;
+        box-sizing: border-box;
+        min-height: 100vh;
+    }
+
+    .main-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* --- Header Animations & Details --- */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .header-box {
+        background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808, #FF9933);
+        background-size: 300% 300%;
+        animation: gradientShift 8s ease infinite;
+        padding: 5px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .header-content {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+    }
+    .title-area h1 {
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        background: linear-gradient(90deg, #000080, #FF9933);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .title-area h3 { margin: 0 0 8px 0; color: #138808; font-size: 18px; font-weight: 700; }
+    .title-area p { margin:0; color:#666; font-size: 14px; }
+    
+    .student-details {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
+        font-size: 14px; color: #444; font-weight: 600;
+        margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 20px;
+    }
+    .detail-item span { color: #000080; }
+
+    /* --- Timeline Structure --- */
+    .timeline {
+        position: relative; max-width: 100%; margin: 0 auto; padding-bottom: 40px;
+    }
+    .timeline::after {
+        content: ''; position: absolute; width: 6px;
+        background: linear-gradient(to bottom, #FF9933, #FFFFFF, #138808);
+        top: 0; bottom: 0; left: 50%; margin-left: -3px; border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* --- Entrance Animation --- */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+        padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box;
+        opacity: 0; animation: fadeInUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        perspective: 1000px;
+    }
+    
+    /* Center Dots & Hover Effects */
+    .container::after {
+        content: ''; position: absolute; width: 20px; height: 20px; right: -10px;
+        background-color: white; border: 4px solid #000080; top: 30px;
+        border-radius: 50%; z-index: 1; box-shadow: 0 0 0 4px rgba(0,0,128,0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .container:hover::after {
+        background-color: #FF9933;
+        border-color: #138808;
+        transform: scale(1.4);
+        box-shadow: 0 0 15px rgba(19, 136, 8, 0.5);
+    }
+    
+    .left { left: 0; }
+    .right { left: 50%; }
+    .right::after { left: -10px; top: 30px; }
+
+    /* --- Colorful Cards & Hover Animations --- */
+    .content {
+        padding: 20px; background: white; position: relative; border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .left .content { border-left: 5px solid #FF9933; }
+    .right .content { border-right: 5px solid #138808; }
+    
+    .container:hover .content {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        border-color: #000080;
+    }
+
+    .year-badge {
+        background: linear-gradient(45deg, #000080, #3333ff); 
+        color: white; padding: 6px 15px; border-radius: 20px;
+        font-size: 14px; font-weight: bold; display: inline-block; margin-bottom: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,128,0.3);
+    }
+    .content h2 { margin: 0 0 12px 0; font-size: 18px; color: #222; transition: color 0.3s ease; }
+    .container:hover .content h2 { color: #000080; }
+    .content p { margin: 0; font-size: 14px; line-height: 1.6; color: #555; }
+    
+    /* --- Image Animations --- */
+    .img-wrapper {
+        overflow: hidden;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+    .content img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+        background-color: transparent; 
+        border: none; 
+        display: block;
+        transition: transform 0.5s ease;
+    }
+    .container:hover .content img {
+        transform: scale(1.05);
+    }
+
+    /* --- RESPONSIVE MOBILE FIXES --- */
+    @media screen and (max-width: 768px) {
+        .timeline::after { left: 31px; }
+        .container { width: 100%; padding-left: 70px; padding-right: 25px; }
+        .container.left, .container.right { left: 0; }
+        .container::after, .right::after { left: 21px; top: 30px; }
+        .left .content, .right .content { border-left: 5px solid #000080; border-right: none; }
+        .header-box { margin-bottom: 30px; }
+        .title-area h1 { font-size: 22px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <div class="header-box">
+        <div class="header-content">
+            <div class="title-area">
+                <h1>SVyasa Deemed To Be University</h1>
+                <h3>Evolution of the Indian Republic: A Constitutional Timeline</h3>
+                <p>CIA-I Assignment</p>
+            </div>
+            <div class="student-details">
+                <div class="detail-item"><span>Name:</span> Vinay S Kumar</div>
+                <div class="detail-item"><span>Subject:</span> Constitution Of India</div>
+                <div class="detail-item"><span>USN No:</span> 2102508684</div>
+                <div class="detail-item"><span>Class:</span> FF06 (S-003) NxtWave</div>
+                <div class="detail-item"><span>Course:</span> B.Tech</div>
+                <div class="detail-item"><span>Sem:</span> 2</div>                
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline">
+        
+    <div class="container left" style="animation-delay: 0.0s;">
+      <div class="content">
+        <div class="year-badge">1858</div>
+        <h2>British Crown Rule</h2>
+        <div class="img-wrapper">
+            <img src="https://media.istockphoto.com/id/1356024831/photo/royal-imperial-state-crown-on-uk-flag-background-symbols-of-great-britain-uk-united-kingdom.jpg?s=612x612&w=0&k=20&c=bJiBrVRrm6-On3oFUoMNjDjtkBWdIWS-nQBsGh-8atA=" alt="British Crown Rule" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>The British Crown took direct control over India, beginning a series of reforms.</p>
+      </div>
+    </div>
+    
+    <div class="container right" style="animation-delay: 0.15s;">
+      <div class="content">
+        <div class="year-badge">1861</div>
+        <h2>Indian Councils Act</h2>
+        <div class="img-wrapper">
+            <img src="https://notes.saralupsc.com/wp-content/uploads/2024/04/image-104.png" alt="Indian Councils Act" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>Involved Indians in governance by establishing local legislative councils at the provincial level.</p>
+      </div>
+    </div>
+    
+    <div class="container left" style="animation-delay: 0.3s;">
+      <div class="content">
+        <div class="year-badge">1885</div>
+        <h2>Formation of the INC</h2>
+        <div class="img-wrapper">
+            <img src="https://www.heritagetimes.in/wp-content/uploads/2024/12/1885-First-Indian-National-Congress-at-Mumbai.png" alt="Formation of the INC" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>The Indian National Congress (INC) was formed as the main organization demanding full independence.</p>
+      </div>
+    </div>
+    
+    <div class="container right" style="animation-delay: 0.44999999999999996s;">
+      <div class="content">
+        <div class="year-badge">1909</div>
+        <h2>Morley-Minto Reforms</h2>
+        <div class="img-wrapper">
+            <img src="https://www.studyiq.com/articles/wp-content/uploads/2022/12/24192628/Morley-Minto-Reforms.jpg" alt="Morley-Minto Reforms" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>Introduced limited elections for Indians to legislative councils and separate electorates.</p>
+      </div>
+    </div>
+    
+    <div class="container left" style="animation-delay: 0.6s;">
+      <div class="content">
+        <div class="year-badge">1919</div>
+        <h2>Rowlatt Act & Gov Act</h2>
+        <div class="img-wrapper">
+            <img src="https://www.vifindia.org/sites/default/files/Jallianwala-Bagh-Massacre-13-4-1919.jpg" alt="Rowlatt Act & Gov Act" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>Introduced Dyarchy. The Rowlatt Act fueled widespread protests like the Jallianwala Bagh Massacre.</p>
+      </div>
+    </div>
+    
+    <div class="container right" style="animation-delay: 0.75s;">
+      <div class="content">
+        <div class="year-badge">1935</div>
+        <h2>Government of India Act</h2>
+        <div class="img-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReT27R4g_wHoiXFa4quO3KGV4E9sVe1ZAYiQ&s" alt="Government of India Act" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>Established a federal system, serving as the primary blueprint for the Indian Constitution's structure.</p>
+      </div>
+    </div>
+    
+    <div class="container left" style="animation-delay: 0.8999999999999999s;">
+      <div class="content">
+        <div class="year-badge">1942</div>
+        <h2>Quit India Movement</h2>
+        <div class="img-wrapper">
+            <img src="https://www.thestatesman.com/wp-content/uploads/2021/08/quit-pratap-singh-bajwa-1024x683.jpg" alt="Quit India Movement" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>Indian leaders demanded an immediate end to British rule during World War II.</p>
+      </div>
+    </div>
+    
+    <div class="container right" style="animation-delay: 1.05s;">
+      <div class="content">
+        <div class="year-badge">1946</div>
+        <h2>Constituent Assembly</h2>
+        <div class="img-wrapper">
+            <img src="https://tile.loc.gov/image-services/iiif/service:ll:llscd:57026883:00010000/full/pct:50/0/default.jpg" alt="Constituent Assembly" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>The Cabinet Mission Plan led to the creation of the Constituent Assembly to draft the Constitution.</p>
+      </div>
+    </div>
+    
+    <div class="container left" style="animation-delay: 1.2s;">
+      <div class="content">
+        <div class="year-badge">1947</div>
+        <h2>Indian Independence</h2>
+        <div class="img-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpS198Nq_baEH4IKvyvB_xZTqb0q7-_Fvbvw&s" alt="Indian Independence" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>India gained independence from British rule on August 15th and was partitioned.</p>
+      </div>
+    </div>
+    
+    <div class="container right" style="animation-delay: 1.3499999999999999s;">
+      <div class="content">
+        <div class="year-badge">1949</div>
+        <h2>Constitution Adopted</h2>
+        <div class="img-wrapper">
+            <img src="https://img.etimg.com/thumb/msid-125559539,width-480,height-360,imgsize-67462,resizemode-75/august-29-1947-the-drafting-committee-takes-shape.jpg" alt="Constitution Adopted" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>The Constitution of India was formally adopted by the Constituent Assembly on Nov 26th.</p>
+      </div>
+    </div>
+    
+    <div class="container left" style="animation-delay: 1.5s;">
+      <div class="content">
+        <div class="year-badge">1950</div>
+        <h2>Constitution Takes Effect</h2>
+        <div class="img-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-_k0fWn0ekQRl1MrpI-NDfpgu4P0rCq-fHw&s" alt="Constitution Takes Effect" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x150/ff9933/ffffff?text=Image+Unavailable'">
+        </div>
+        <p>The Constitution came into effect on January 26th, commemorating Purna Swaraj.</p>
+      </div>
+    </div>
+    
+    </div>
+</div>
+
+</body>
+</html>
